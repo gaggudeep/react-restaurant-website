@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-    function RenderDish({dish}) {
+class Dishdetail extends Component {
+
+    componentDidMount() {
+		console.log("Dishdetail Component componentDidMount is invoked.");
+    }
+    
+    componentDidUpdate() {
+        console.log("Dishdetail Component componentDidUpdate is invoked.");
+
+    }
+
+    renderDish(dish) {
         if(dish != null) {
             return (
                 <div className="col-12 col-md-5 ml-1">
@@ -22,7 +33,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
         }
     }
 
-function RenderComments({comments}) {
+    renderComments(comments) {
         if(comments != null) {
             const cmts = comments.map((comment) => {
                         return (
@@ -48,16 +59,16 @@ function RenderComments({comments}) {
         }
     }
 
-    const Dishdetail = (props) => {
+    render() {
 
 		console.log("Dishdetail Component render is invoked.");
 
-        if(props.selectedDish != null) {
+        if(this.props.selectedDish != null) {
             return (
                 <div className="container">
                     <div className="row">
-                        <RenderDish dish={props.selectedDish} />
-                        <RenderComments comments={props.selectedDish.comments} />
+                        {this.renderDish(this.props.selectedDish)}
+                        {this.renderComments(this.props.selectedDish.comments)}
                     </div>
                 </div>
              );
@@ -68,5 +79,6 @@ function RenderComments({comments}) {
             );
         }
     }
+}
 
 export default Dishdetail;
